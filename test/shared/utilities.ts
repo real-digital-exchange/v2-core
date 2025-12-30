@@ -14,8 +14,8 @@ const PERMIT_TYPEHASH = keccak256(
   toUtf8Bytes('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)')
 )
 
-export function expandTo18Decimals(n: number): BigNumber {
-  return bigNumberify(n).mul(bigNumberify(10).pow(18))
+export function expandTo6Decimals(n: number): BigNumber {
+  return bigNumberify(n).mul(bigNumberify(10).pow(6))
 }
 
 function getDomainSeparator(name: string, tokenAddress: string) {
