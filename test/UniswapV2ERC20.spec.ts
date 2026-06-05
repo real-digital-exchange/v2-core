@@ -5,14 +5,14 @@ import { bigNumberify, hexlify, keccak256, defaultAbiCoder, toUtf8Bytes } from '
 import { solidity, MockProvider, deployContract } from 'ethereum-waffle'
 import { ecsign } from 'ethereumjs-util'
 
-import { expandTo6Decimals, getApprovalDigest } from './shared/utilities'
+import { expandTo18Decimals, getApprovalDigest } from './shared/utilities'
 
 import ERC20 from '../build/ERC20.json'
 
 chai.use(solidity)
 
-const TOTAL_SUPPLY = expandTo6Decimals(10000)
-const TEST_AMOUNT = expandTo6Decimals(10)
+const TOTAL_SUPPLY = expandTo18Decimals(10000)
+const TEST_AMOUNT = expandTo18Decimals(10)
 
 describe('UniswapV2ERC20', () => {
   const provider = new MockProvider({
@@ -31,7 +31,7 @@ describe('UniswapV2ERC20', () => {
     const name = await token.name()
     expect(name).to.eq('Uniswap V2')
     expect(await token.symbol()).to.eq('UNI-V2')
-    expect(await token.decimals()).to.eq(6)
+    expect(await token.decimals()).to.eq(18)
     expect(await token.totalSupply()).to.eq(TOTAL_SUPPLY)
     expect(await token.balanceOf(wallet.address)).to.eq(TOTAL_SUPPLY)
     expect(await token.DOMAIN_SEPARATOR()).to.eq(
